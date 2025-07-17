@@ -3,7 +3,7 @@ A custom command-line interpreter written in C, accessible through a modern, int
 
 Animated Demo
 
-(This is where you will embed an animated GIF of your shell in action. See instructions below.)
+![Project Terminus Demo](assets/demo.gif)
 
 **About The Project**
 
