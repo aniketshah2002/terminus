@@ -41,7 +41,7 @@ Tech Stack
 
 **_Backend:_** C, Node.js, Express.js
 
-**Real-time: **__WebSockets (ws library)
+**Real-time:**__ WebSockets (ws library)
 
 Terminal Emulation: xterm.js
 
