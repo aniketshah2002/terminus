@@ -1,15 +1,15 @@
-Project Terminus: A Full-Stack Command-Line Shell
+**Project Terminus: A Full-Stack Command-Line Shell**
 A custom command-line interpreter written in C, accessible through a modern, interactive web interface built with Node.js and WebSockets.
 
 Animated Demo
 
 (This is where you will embed an animated GIF of your shell in action. See instructions below.)
 
-About The Project
+**About The Project**
 
 Project Terminus is a deep dive into core operating system concepts and full-stack web development. It demonstrates a comprehensive understanding of process management, inter-process communication, and real-time web technologies. The backend is a powerful shell written from scratch in C, while the frontend is a sleek, responsive terminal emulator.
 
-Features
+**Features**
 
 Shell Core (C):
 
@@ -39,9 +39,9 @@ Web Interface (Node.js & JavaScript):
 
 Tech Stack
 
-Backend: C, Node.js, Express.js
+**_Backend:_** C, Node.js, Express.js
 
-Real-time: WebSockets (ws library)
+**Real-time: **__WebSockets (ws library)
 
 Terminal Emulation: xterm.js
 
@@ -49,7 +49,7 @@ Process Management: node-pty
 
 Deployment: Render (or your chosen platform)
 
-How to Run Locally
+**How to Run Locally**__
 
 Clone the repository:
 
