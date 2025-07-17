@@ -1,0 +1,4 @@
+total 88
+-rw-r--r--@ 1 aniketshah  staff      0 Jul 17 17:35 file_list.txt
+-rwxr-xr-x@ 1 aniketshah  staff  34536 Jul 17 17:34 shell
+-rw-r--r--@ 1 aniketshah  staff   6076 Jul 17 17:34 shell.c

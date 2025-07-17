@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Project Terminus</title>
+    <!-- (Your fonts and styles remain the same) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xterm-addon-fit@0.8.0/lib/xterm-addon-fit.min.js"></script>
+    <style>
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background-image: 
+                linear-gradient(to right, rgba(25, 25, 45, 0.85), rgba(45, 25, 25, 0.85)),
+                url('https://images.pexels.com/photos/5474040/pexels-photo-5474040.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=2');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            color: #e0e0e0; margin: 0; padding: 20px; box-sizing: border-box;
+            display: flex; flex-direction: column; align-items: center; height: 100vh;
+        }
+        h1 {
+            font-weight: 300; font-size: 2.5em; color: #ffffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 2px 2px 4px rgba(0, 0, 0, 0.7);
+            margin-bottom: 20px;
+        }
+        #terminal-container {
+            width: 80%; max-width: 1200px; flex-grow: 1; margin-bottom: 20px;
+            background-color: rgba(10, 10, 20, 0.75); border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 8px; overflow: hidden; box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+        #terminal { height: 100%; padding: 15px; box-sizing: border-box; }
+    </style>
+</head>
+<body>
+    <h1>Project Terminus</h1>
+    <div id="terminal-container"><div id="terminal"></div></div>
+    <script>
+        const term = new Terminal({
+            cursorBlink: true, fontFamily: '"Exo 2", monospace', fontSize: 16,
+            theme: { background: 'transparent', foreground: '#e0e0e0', cursor: '#00ffff',
+                     selectionBackground: 'rgba(0, 255, 255, 0.3)', brightCyan: '#00ffff', cyan: '#00ffff' }
+        });
+        const fitAddon = new FitAddon.FitAddon();
+        term.loadAddon(fitAddon);
+        term.open(document.getElementById('terminal'));
+        fitAddon.fit();
+        window.addEventListener('resize', () => fitAddon.fit());
+
+        // --- Dynamic WebSocket URL ---
+        // This is the key change for deployment. It automatically determines
+        // whether to use a secure (wss://) or insecure (ws://) connection.
+        const protocol = (window.location.protocol === 'https:') ? 'wss' : 'ws';
+        const socketUrl = `${protocol}://${window.location.host}`;
+        const socket = new WebSocket(socketUrl);
+
+        socket.onopen = () => {
+            term.writeln('\x1b[1;36mConnection established with Terminus Core.\x1b[0m');
+            term.writeln('Welcome to your C Shell interface.');
+            term.writeln('');
+        };
+        socket.onmessage = (event) => term.write(event.data);
+        socket.onclose = () => term.writeln('\r\n\x1b[1;31mConnection to Terminus Core lost.\x1b[0m');
+        socket.onerror = (error) => term.writeln(`\r\n\x1b[31mWebSocket Error\x1b[0m`);
+        term.onData(data => socket.send(data));
+    </script>
+</body>
+</html>
