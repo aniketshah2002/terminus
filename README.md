@@ -3,7 +3,7 @@ A custom command-line interpreter written in C, accessible through a modern, int
 
 Animated Demo
 
-![Project Terminus Demo](assets/demo.gif)
+![terminus](assets/demo.gif)
 
 **About The Project**
 
